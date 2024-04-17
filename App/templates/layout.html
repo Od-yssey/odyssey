@@ -1,7 +1,7 @@
-<!doctype html>
+<doctype html>
 <html>
   <head>
-  
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,7 +14,8 @@
   </head>
   <body>
     
-      <nav class="purple">
+      <nav class="green">
+        <!--
           <div class="nav-wrapper">
               <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
               <ul id="nav-mobile" class="left">
@@ -25,6 +26,7 @@
                   {% endif %}
                   <li><a href="/static/users">Users JS</a></li>
               </ul>
+              -->
               {% if is_authenticated %}
               <ul id="nav-mobile" class="right">
                 <li><a href="/logout">Logout</a></li>
@@ -54,17 +56,19 @@
     <div class="container" id="content">{% block content %}{% endblock %}</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--
+
     <script>
        M.AutoInit();
-
-        {% with messages = get_flashed_messages() %}
+              {% with messages = get_flashed_messages() %}
           {% if messages %}
               {% for message in messages %}
               M.toast({html: '{{message}}'})
               {% endfor %}
           {% endif %}
         {% endwith %}
-       
+     
     </script>
+     -->
   </body>
 </html>
