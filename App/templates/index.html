@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+{% block page %}Home{% endblock %}
 
 {{ super() }}
 
@@ -9,5 +9,5 @@
     {% if is_authenticated %}
         <p> Welcome {{current_user.username}} </p>
     {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+    <p>Hello This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
 {% endblock %}
