@@ -41,6 +41,7 @@ class Student(User):
     info = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # Establishing Foreign Key Relationship
+    
     def __init__(self, student_id, first_name, last_name, image, programme, faculty, gpa, info, email, username, password):
         super().__init__(username, password)
         self.student_id = student_id
@@ -58,7 +59,7 @@ class Company(User):
     __mapper_args__ = {
         'polymorphic_identity': 'company'
     }
-    id = db.Column(db.String(9), primary_key=True)
+    company_id = db.Column(db.String(9), primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     location = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(120), nullable=False)
@@ -66,14 +67,15 @@ class Company(User):
     contact = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
 
-    def __init__(self, id, name, location, description, email, contact, username, password):
+    def __init__(self, company_id, name, location, description, email, contact, username, password):
         super().__init__(username, password)
-        self.id = id
+        self.company_id = id
         self.name = name
         self.location = location
         self.description = description
         self.email = email
         self.contact = contact
+
 class Admin(User):
     __tablename__ = 'admin'
     __mapper_args__ = {
@@ -82,7 +84,8 @@ class Admin(User):
     admin_id = db.Column(db.String(9), primary_key=True)
     admin_name = db.Column(db.String(80), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    def _init_(self, admin_id, admin_name, username, password):
+    
+    def __init__(self, admin_id, admin_name, username, password):
         super()._init_(username, password)
         self.admin_id = admin_id
         self.admin_name = admin_name
@@ -90,13 +93,14 @@ class Admin(User):
 class Internship(db.Model):
     __tablename__  = 'internship'
     id = db.Column(db.Integer, primary_key=True)
-    company_id = db.Column(db.String(9), db.ForeignKey('company.id'), nullable=False)
+    company_id = db.Column(db.String(9), db.ForeignKey('company.company_id'), nullable=False)
     description = db.Column(db.String(120), nullable=False)
     title = db.Column(db.String(120), nullable=False)
     deadline = db.Column(db.String(120), nullable=False)
     start_period = db.Column(db.String(120), nullable=False)
     end_period = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
     def _init_(self, company_id, description, title, deadline, start_period, end_period):
         self.company_id = company_id
         self.description = description
