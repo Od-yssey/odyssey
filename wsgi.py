@@ -1,63 +1,15 @@
-import click, pytest, sys, csv
+import click, pytest, sys
 from flask import Flask
 from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
 from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users )
-from App.models import *
+
 # This commands file allow you to create convenient CLI commands for testing controllers
 
 app = create_app()
 migrate = get_migrate(app)
-
-def parse_students():
-   with open('students.csv', mode='r', encoding='utf-8') as file:
-     csv_reader = csv.DictReader(file)
-     for row in csv_reader:
-        student = Student(student_id=row['ID'],
-                         first_name=row['FirstName'],
-                         image=row['Picture'],
-                         last_name=row['LastName'],
-                         programme=row['Program'],
-                         faculty=row['Faculty'],
-                         gpa=row['GPA'],
-                         info=row['Info'],
-                        email=row['Email'],
-                        username=row['ID'],
-                        password = row['ID'])
-        db.session.add(student)
-     db.session.commit()
-
-def parse_companies():
-  with open('company.csv', mode='r', encoding='utf-8') as file:
-    csv_reader = csv.DictReader(file)
-    for row in csv_reader:
-        company = Company(company_id=row['ID'],
-                         name=row['Company_Name'],
-                         location=row['Location'],
-                         description=row['Description'],
-                         email=row['Email'],
-                         contact=row['Contact'],
-                         username=row['ID'],
-                         password = row['ID'])
-        db.session.add(company)
-    db.session.commit()
-
-def parse_internships():
-    with open('internship.csv', mode='r',encoding='utf-8') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            internship = Internship(
-                  company_id = row['Company ID'],
-                  title = row['Title'],
-                  description = row['Description'],
-                  deadline = row['Deadline'],
-                  start_period = row['Start Period'],
-                  end_period = row['End Period']
-              )
-            db.session.add(internship)
-        db.session.commit()
 
 # This command creates and initializes the database
 @app.cli.command("init", help="Creates and initializes the database")
@@ -65,9 +17,6 @@ def initialize():
     db.drop_all()
     db.create_all()
     create_user('bob', 'bobpass')
-    parse_students()
-    parse_companies()
-    parse_internships()
     print('database intialized')
 
 '''
@@ -115,6 +64,6 @@ def user_tests_command(type):
         sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
     else:
         sys.exit(pytest.main(["-k", "App"]))
-    
+
 
 app.cli.add_command(test)
