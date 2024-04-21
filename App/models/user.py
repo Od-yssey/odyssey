@@ -101,7 +101,7 @@ class Internship(db.Model):
     end_period = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
-    def _init_(self, company_id, description, title, deadline, start_period, end_period):
+    def __init__(self, company_id, description, title, deadline, start_period, end_period):
         self.company_id = company_id
         self.description = description
         self.title = title

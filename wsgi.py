@@ -43,7 +43,21 @@ def parse_companies():
                          password = row['ID'])
       db.session.add(company)
     db.session.commit()
-
+def parse_internships():
+    with open('internship.csv', mode='r',encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            internship = Internship(
+                  id = row['ID'],
+                  company_id = row['Company ID'],
+                  title = row['Title'],
+                  description = row['Description'],
+                  deadline = row['Deadline'],
+                  start_date = row['Start Period'],
+                  end_date = row['End Period']
+              )
+            db.session.add(internship)
+        db.session.commit()
 # This command creates and initializes the database
 @app.cli.command("init", help="Creates and initializes the database")
 def initialize():
