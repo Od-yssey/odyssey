@@ -6,45 +6,56 @@
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
+    <style>
+      .navbar {
+            background-color: #D9D9D9; /* Set the background color to #D9D9D9 */
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
 
+        .navbar .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-family: 'Red Hat Display', sans-serif; /* Set the font family to Red Hat Display */
+        }
+    </style>
   </head>
   <body>
     
-      <nav class="purple">
-          <div class="nav-wrapper">
-              <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
-              <ul id="nav-mobile" class="left">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/users">Users Jinja</a></li>
-                  {% if is_authenticated %}
-                    <li><a href="/identify">Identify</a></li>
-                  {% endif %}
-                  <li><a href="/static/users">Users JS</a></li>
-              </ul>
+    <nav>
+      <div class="nav-wrapper" style="background-color: #D9D9D9; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+          <a href="/" class="brand-logo left"><img src="odyssey_logo.png" style="height: 50px;"></a>
+          <a href="/" class="brand-logo left" style="color: #232426; font-size: 24px; font-family: 'Red Hat Display', sans-serif; margin-left: 10vh;">ODYSSEY</a>
+          <div>
               {% if is_authenticated %}
-              <ul id="nav-mobile" class="right">
-                <li><a href="/logout">Logout</a></li>
-              </ul>
+                  <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 200vh;">
+                      <li><a href="/logout">Logout</a></li>
+                  </ul>
               {% else %}
-              <form class="right navbar-form" method="POST" action="/login" style="display: flex; flex-wrap: nowrap; align-items: center; margin-right: 10px;">
-                  <div class="input-field" style="margin-right: 10px;">
-                      <input placeholder="username" value="bob" name="username" type="text" class="validate" required>
-                      <label for="username">username</label>
-                  </div>
-                  <div class="input-field" style="margin-right: 10px;">
-                      <input placeholder="password"value="bobpass" name="password" type="password" class="validate" required>
-                      <label for="password">Password</label>
-                  </div>
-                  <button type="submit" class="btn waves-effect waves-light">Login</button>
-              </form>
+                  <form class="right navbar-form" method="POST" action="/login" style="color: #232426; display: flex; flex-wrap: nowrap; align-items: center; margin-right: 10px; margin-left: 150vh;" >
+                      <div class="input-field" style="margin-right: 10px;">
+                          <input placeholder="username" value="bob" name="username" type="text" class="validate" required>
+                          <label for="username">username</label>
+                      </div>
+                      <div class="input-field" style="margin-right: 10px;">
+                          <input placeholder="password"value="bobpass" name="password" type="password" class="validate" required>
+                          <label for="password">Password</label>
+                      </div>
+                      <button type="submit" class="btn waves-effect waves-light">Login</button>
+                  </form>
               {% endif %}
-              
           </div>
-      </nav>
+      </div>
+  </nav>
+  
       <style>
           .navbar-form label {
               color: white !important;
