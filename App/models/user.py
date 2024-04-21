@@ -29,7 +29,7 @@ class User(db.Model):
 class Student(User):
     __tablename__ = 'student'
     __mapper_args__ = {
-        'polymorphic_identity': 'regular user',
+        'polymorphic_identity': 'student',
     }
     student_id = db.Column(db.String(9), primary_key=True)
     first_name = db.Column(db.String(80), nullable=False)
@@ -69,7 +69,7 @@ class Company(User):
 
     def __init__(self, company_id, name, location, description, email, contact, username, password):
         super().__init__(username, password)
-        self.company_id = id
+        self.company_id = company_id
         self.name = name
         self.location = location
         self.description = description
