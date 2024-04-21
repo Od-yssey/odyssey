@@ -15,7 +15,7 @@ def parse_students():
    with open('students.csv', mode='r', encoding='utf-8') as file:
      csv_reader = csv.DictReader(file)
      for row in csv_reader:
-       student = Student(student_id=row['ID'],
+        student = Student(student_id=row['ID'],
                          first_name=row['FirstName'],
                          image=row['Picture'],
                          last_name=row['LastName'],
@@ -26,14 +26,14 @@ def parse_students():
                         email=row['Email'],
                         username=row['ID'],
                         password = row['ID'])
-       db.session.add(student)
+        db.session.add(student)
      db.session.commit()
 
 def parse_companies():
   with open('company.csv', mode='r', encoding='utf-8') as file:
     csv_reader = csv.DictReader(file)
     for row in csv_reader:
-      company = Company(company_id=row['ID'],
+        company = Company(company_id=row['ID'],
                          name=row['Company_Name'],
                          location=row['Location'],
                          description=row['Description'],
@@ -41,23 +41,24 @@ def parse_companies():
                          contact=row['Contact'],
                          username=row['ID'],
                          password = row['ID'])
-      db.session.add(company)
+        db.session.add(company)
     db.session.commit()
+
 def parse_internships():
     with open('internship.csv', mode='r',encoding='utf-8') as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             internship = Internship(
-                  id = row['ID'],
                   company_id = row['Company ID'],
                   title = row['Title'],
                   description = row['Description'],
                   deadline = row['Deadline'],
-                  start_date = row['Start Period'],
-                  end_date = row['End Period']
+                  start_period = row['Start Period'],
+                  end_period = row['End Period']
               )
             db.session.add(internship)
         db.session.commit()
+
 # This command creates and initializes the database
 @app.cli.command("init", help="Creates and initializes the database")
 def initialize():
@@ -66,6 +67,7 @@ def initialize():
     create_user('bob', 'bobpass')
     parse_students()
     parse_companies()
+    parse_internships()
     print('database intialized')
 
 '''
