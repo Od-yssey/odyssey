@@ -3,7 +3,6 @@ from App.database import db
 
 def create_user(username, password):
     newuser = User(username=username, password=password)
-    newuser.type = "Student"
     db.session.add(newuser)
     db.session.commit()
     return newuser
