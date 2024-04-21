@@ -8,9 +8,10 @@ class User(db.Model):
     type = db.Column(db.String(50))
     __mapper_args__ = {'polymorphic_identity': 'user', 'polymorphic_on': type}
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, type):
         self.username = username
         self.set_password(password)
+        self.type = type
 
     def get_json(self):
         return{
@@ -29,7 +30,7 @@ class User(db.Model):
 class Student(User):
     __tablename__ = 'student'
     __mapper_args__ = {
-        'polymorphic_identity': 'regular user',
+        'polymorphic_identity': 'student',
     }
     student_id = db.Column(db.String(9), primary_key=True)
     first_name = db.Column(db.String(80), nullable=False)
@@ -43,7 +44,7 @@ class Student(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # Establishing Foreign Key Relationship
     
     def __init__(self, student_id, first_name, last_name, image, programme, faculty, gpa, info, email, username, password):
-        super().__init__(username, password)
+        super().__init__(username, password, type='student')
         self.student_id = student_id
         self.first_name = first_name
         self.last_name = last_name
@@ -68,8 +69,8 @@ class Company(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
 
     def __init__(self, company_id, name, location, description, email, contact, username, password):
-        super().__init__(username, password)
-        self.company_id = id
+        super().__init__(username, password, type='company')
+        self.company_id = company_id
         self.name = name
         self.location = location
         self.description = description
@@ -86,7 +87,7 @@ class Admin(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
     def __init__(self, admin_id, admin_name, username, password):
-        super()._init_(username, password)
+        super()._init_(username, password, type='admin')
         self.admin_id = admin_id
         self.admin_name = admin_name
 
