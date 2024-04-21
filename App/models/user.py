@@ -44,6 +44,7 @@ class Student(User):
     
     def __init__(self, student_id, first_name, last_name, image, programme, faculty, gpa, info, email, username, password):
         super().__init__(username, password)
+        self.type = "student"
         self.student_id = student_id
         self.first_name = first_name
         self.last_name = last_name
@@ -69,6 +70,7 @@ class Company(User):
 
     def __init__(self, company_id, name, location, description, email, contact, username, password):
         super().__init__(username, password)
+        self.type = "company"
         self.company_id = company_id
         self.name = name
         self.location = location
@@ -87,6 +89,7 @@ class Admin(User):
     
     def __init__(self, admin_id, admin_name, username, password):
         super()._init_(username, password)
+        self.type = "admin"
         self.admin_id = admin_id
         self.admin_name = admin_name
 
@@ -101,7 +104,7 @@ class Internship(db.Model):
     end_period = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
-    def _init_(self, company_id, description, title, deadline, start_period, end_period):
+    def __init__(self, company_id, description, title, deadline, start_period, end_period):
         self.company_id = company_id
         self.description = description
         self.title = title
