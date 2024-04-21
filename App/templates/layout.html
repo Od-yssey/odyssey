@@ -24,8 +24,23 @@
         .navbar .navbar-brand {
             color: white;
             font-size: 24px;
-            font-family: 'Red Hat Display', sans-serif; /* Set the font family to Red Hat Display */
+            font-family: 'Red Hat Display', sans-serif;
         }
+      
+    .page-title-container {
+      width: 100%;
+      border-top: 1px solid #232426;
+      border-bottom: 1px solid #232426;
+    }
+
+    .page-title {
+      font-family: 'Red Hat Display', sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: left;
+      margin-left: 5vh;
+    }
+      
     </style>
   </head>
   <body>
@@ -36,7 +51,7 @@
           <a href="/" class="brand-logo left" style="color: #232426; font-size: 24px; font-family: 'Red Hat Display', sans-serif; margin-left: 10vh;">ODYSSEY</a>
           <div>
               {% if is_authenticated %}
-                  <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 100vh;">
+                  <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 200vh;">
                       <li><a href="/logout">Logout</a></li>
                   </ul>
               {% else %}
@@ -54,15 +69,29 @@
               {% endif %}
           </div>
       </div>
-  </nav>
-  
-      <style>
-          .navbar-form label {
-              color: white !important;
-          }
-      </style>
+    </nav>
+    <div class="page-title-container">
+      <h1 class="page-title">Internship Listings</h1>
+    </div>
 
-    <div class="container" id="content">{% block content %}{% endblock %}</div>
+
+    <div class="container">
+      <div class="row">
+        {% for internship in internships %}
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ internship.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ internship.company.name }}</h6>
+                <p class="card-text">{{ internship.description }}</p>
+                <p class="card-text">Deadline: {{ internship.deadline }}</p>
+                <p class="card-text">Period: {{ internship.start_period }} - {{ internship.end_period }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
