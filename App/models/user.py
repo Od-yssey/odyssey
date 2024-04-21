@@ -8,10 +8,9 @@ class User(db.Model):
     type = db.Column(db.String(50))
     __mapper_args__ = {'polymorphic_identity': 'user', 'polymorphic_on': type}
 
-    def __init__(self, username, password, type):
+    def __init__(self, username, password):
         self.username = username
         self.set_password(password)
-        self.type = type
 
     def get_json(self):
         return{
@@ -44,7 +43,7 @@ class Student(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # Establishing Foreign Key Relationship
     
     def __init__(self, student_id, first_name, last_name, image, programme, faculty, gpa, info, email, username, password):
-        super().__init__(username, password, type='student')
+        super().__init__(username, password)
         self.student_id = student_id
         self.first_name = first_name
         self.last_name = last_name
@@ -69,7 +68,7 @@ class Company(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
 
     def __init__(self, company_id, name, location, description, email, contact, username, password):
-        super().__init__(username, password, type='company')
+        super().__init__(username, password)
         self.company_id = company_id
         self.name = name
         self.location = location
@@ -87,7 +86,7 @@ class Admin(User):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
     def __init__(self, admin_id, admin_name, username, password):
-        super()._init_(username, password, type='admin')
+        super()._init_(username, password)
         self.admin_id = admin_id
         self.admin_name = admin_name
 
