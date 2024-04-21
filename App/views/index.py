@@ -38,6 +38,22 @@ def parse_companies():
       db.session.add(company)
     db.session.commit()
 
+def parse_internships():
+    with open('internship.csv', mode='r', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            internship = Internship(
+                company_id=row['Company_ID'],
+                description=row['Description'],
+                title=row['Title'],
+                deadline=row['Deadline'],
+                start_period=row['Start_Period'],
+                end_period=row['End_Period']
+            )
+            db.session.add(internship)
+        db.session.commit()
+
+
 @index_views.route('/', methods=['GET'])
 def index_page():
     return render_template('index.html')
@@ -49,6 +65,7 @@ def init():
     create_user('bob', 'bobpass')
     parse_students()
     parse_companies()
+    parse_internships()
     return jsonify(message='db initialized!')
 
 @index_views.route('/health', methods=['GET'])
