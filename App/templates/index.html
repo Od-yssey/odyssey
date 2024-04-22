@@ -1,13 +1,264 @@
-{% extends "layout.html" %} 
-{% block title %}Internship{% endblock %}
-{% block page %}Internship{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Listings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .navbar {
+            background-color: #D9D9D9;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
 
-{{ super() }}
+        .navbar .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-family: 'Red Hat Display', sans-serif;
+        }
 
-{% block content %}
-    <h1>Flask MVC</h1>
-    {% if is_authenticated %}
-        <p> Welcome {{current_user.username}} </p>
+        .page-title-container {
+            width: 100%;
+            border-top: 1px solid #232426;
+            border-bottom: 1px solid #232426;
+        }
+
+        .page-title {
+            font-family: 'Red Hat Display', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 5vh;
+        }
+
+        .card {
+            border: 1px solid black; 
+            border-radius: 10px; 
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper" style="background-color: #D9D9D9; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+        <a href="/" class="brand-logo left"><img src="odyssey_logo.png" style="height: 50px;"></a>
+        <a href="/" class="brand-logo left" style="color: #232426; font-size: 24px; font-family: 'Red Hat Display', sans-serif; margin-left: 10vh;">ODYSSEY</a>
+        <div>
+            {% if is_authenticated %}
+                <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 200vh;">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            {% else %}
+                <form class="right navbar-form" method="POST" action="/login" style="color: #232426; display: flex; flex-wrap: nowrap; align-items: center; margin-right: 10px; margin-left: 150vh;" >
+                    <div class="input-field" style="margin-right: 10px;">
+                        <input placeholder="username" value="bob" name="username" type="text" class="validate" required>
+                        <label for="username">username</label>
+                    </div>
+                    <div class="input-field" style="margin-right: 10px;">
+                        <input placeholder="password"value="bobpass" name="password" type="password" class="validate" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light">Login</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="page-title-container">
+    <h1 class="page-title">Internship Listings</h1>
+</div>
+
+<main style="padding: 1em" class="row">
+    <section class="col s12 m9" style="height:70vh; overflow-y:scroll;">
+        <div class="row" style="width: 100%; background-color:gainsboro;">
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Web Development Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                    
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Web Development Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Business Management Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: I.T Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Software Engineering Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Software Engineering Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Computer Science Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title:Cybersecurity Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+            <article class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Title: Marketing Intern</span>
+                        <p>Deadline:21/4/2024</p>
+                        <p>Period:3/6/2024-30/8/2024</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="btn">Apply</a>
+                        <a href="#" class="btn">Details</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+    </section>
+    
+    <section class="col s12 m3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Internship Details</span>
+                <ul class="collection">
+                    <li class="collection-item">
+                        <strong>Internship Title:</strong> Web Development Intern
+                    </li>
+                    <li class="collection-item">
+                        <strong>Company:</strong> Caribbean Tech Solutions
+                    </li>
+                    <li class="collection-item">
+                        <strong>Description:</strong> Join the dynamic team at Caribbean Tech Solutions and immerse yourself in a collaborative environment focused on enhancing their online presence. As a Web Development Intern, you will have the opportunity to engage directly with seasoned professionals, contributing your skills and ideas to elevate the functionality, user experience, and aesthetic appeal of their business website. Dive into real-world projects, gain hands-on experience in front-end and back-end development, and leave your mark on impactful web solutions that resonate with a global audience. This internship offers an invaluable learning experience, networking opportunities, and the chance to make meaningful contributions to a forward-thinking tech company.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    M.AutoInit();
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    M.toast({html: '{{message}}'})
+    {% endfor %}
     {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
-{% endblock %}
+    {% endwith %}
+</script>
+
+</body>
+</html>
