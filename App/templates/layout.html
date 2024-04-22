@@ -47,11 +47,11 @@
     
     <nav>
       <div class="nav-wrapper" style="background-color: #D9D9D9; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
-          <a href="/" class="brand-logo left"><img src="odyssey_logo.png" style="height: 50px;"></a>
+          <a href="/" class="brand-logo left"><img src="/App/templates/odyssey_logo.png" style="height: 50px;"></a>
           <a href="/" class="brand-logo left" style="color: #232426; font-size: 24px; font-family: 'Red Hat Display', sans-serif; margin-left: 10vh;">ODYSSEY</a>
           <div>
               {% if is_authenticated %}
-                  <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 200vh;">
+                  <ul id="nav-mobile" class="right" style="color: #232426; margin-left: 170vh;">
                       <li><a href="/logout">Logout</a></li>
                   </ul>
               {% else %}
@@ -70,31 +70,9 @@
           </div>
       </div>
     </nav>
-    <div class="page-title-container">
-      <h1 class="page-title">Internship Listings</h1>
-    </div>
-
-
-    <div class="container">
-      <div class="row">
-        {% for internship in internships %}
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ internship.title }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ internship.company.name }}</h6>
-                <p class="card-text">{{ internship.description }}</p>
-                <p class="card-text">Deadline: {{ internship.deadline }}</p>
-                <p class="card-text">Period: {{ internship.start_period }} - {{ internship.end_period }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
+    <!--script>
        M.AutoInit();
 
         {% with messages = get_flashed_messages() %}
@@ -105,6 +83,6 @@
           {% endif %}
         {% endwith %}
        
-    </script>
+    </script-->
   </body>
 </html>
